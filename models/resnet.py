@@ -27,11 +27,11 @@ def remove_forward_hooks(hook_handles):
         hook.remove()
 
 def asm_hook(module, input, output):
-    print(f"Activation hook triggered for module: {module.__class__.__name__}")
+    #print(f"Activation hook triggered for module: {module.__class__.__name__}")
     p = torch.full_like(output, ratio)
     mask = torch.bernoulli(p)
     mask_bin = binarize(mask)
-    print(mask_bin)
+    #print(mask_bin)
     output_bin = binarize(output)
     return output_bin * mask_bin
 
