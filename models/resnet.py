@@ -3,7 +3,7 @@ import torch.nn as nn
 from torchvision.models import resnet18, ResNet18_Weights
 from globals import CONFIG
 
-ratio = 0.8
+ratio = 0.2
 
 def binarize(tensor):
     return torch.where(tensor > 0, torch.tensor(1), torch.tensor(0.0))
@@ -11,7 +11,7 @@ def binarize(tensor):
 def register_forward_hooks(model, hook, layer_type, skip_step=None):
     hook_handles = []
     layer_count = 0
-    for layer in model.modules():
+    for layer in model.resnet.modules():
         if isinstance(layer, layer_type):
             if skip_step is None:
                 hook_handles.append(layer.register_forward_hook(hook))
