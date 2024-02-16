@@ -32,7 +32,7 @@ def asm_hook(module, input, output):
     mask = torch.bernoulli(p)
     mask_bin = binarize(mask)
     print(mask_bin)
-    output_bin = binarize(mask)
+    output_bin = binarize(output)
     return output_bin * mask_bin
 
 class BaseResNet18(nn.Module):
