@@ -31,6 +31,7 @@ def asm_hook(module, input, output):
     p = torch.full_like(output, ratio)
     mask = torch.bernoulli(p)
     mask_bin = binarize(mask)
+    print(mask_bin)
     output_bin = binarize(mask)
     return output_bin * mask_bin
 
