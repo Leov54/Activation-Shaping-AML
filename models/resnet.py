@@ -3,7 +3,7 @@ import torch.nn as nn
 from torchvision.models import resnet18, ResNet18_Weights
 from globals import CONFIG
 
-ratio = 1
+ratio = 0.75
 
 def binarize(tensor):
     return torch.where(tensor > 0, torch.tensor(1), torch.tensor(0.0))
