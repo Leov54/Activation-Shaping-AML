@@ -66,9 +66,9 @@ def train(model: BaseResNet18, data):
         if CONFIG.experiment in ['random']:
             hook_handles = []
             #hook_handles = register_forward_hooks(model, asm_hook, nn.ReLU) 
-            #hook_handles.append(model.resnet.layer2[0].bn1.register_forward_hook(asm_hook))
+            hook_handles.append(model.resnet.layer1[0].bn1.register_forward_hook(asm_hook))
 
-            hook_handles =register_forward_hooks(model, asm_hook, nn.Conv2d, skip_step=3)
+            #hook_handles =register_forward_hooks(model, asm_hook, nn.Conv2d, skip_step=3)
             #for name, module in model.named_modules():
             #    if isinstance(module, torch.nn.Conv2d) and len(module._modules)%3 ==0:
             #        hook_handles.append(module.register_forward_hook(asm_hook))
