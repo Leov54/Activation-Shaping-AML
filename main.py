@@ -66,7 +66,11 @@ def train(model: BaseResNet18, data):
         if CONFIG.experiment in ['random']:
             hook_handles = []
             #hook_handles = register_forward_hooks(model, asm_hook, nn.ReLU) 
-            hook_handles.append(model.resnet.layer2[0].bn1.register_forward_hook(asm_hook))  
+            #hook_handles.append(model.resnet.layer2[0].bn1.register_forward_hook(asm_hook))
+            for name, module in model.named_modules():
+                if isinstance(module, torch.nn.Conv2d) and len(module._modules) % 3 == 0:
+                    hook_handles.append(module.register_forward_hook(asm_hook))
+              
         
         for batch_idx, batch in enumerate(tqdm(data['train'])):
             
