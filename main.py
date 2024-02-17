@@ -67,7 +67,7 @@ def train(model: BaseResNet18, data):
             hook_handles = []
             #hook_handles = register_forward_hooks(model, asm_hook, nn.BatchNorm2d) 
             
-            hook_handles.append(model.resnet.layer3[1].bn2.register_forward_hook(asm_hook))
+            hook_handles.append(model.resnet.layer3[0].conv1.register_forward_hook(asm_hook))
             #hook_handles =register_forward_hooks(model, asm_hook, nn.Conv2d)
             #for name, module in model.named_modules():
             #    if isinstance(module, torch.nn.Conv2d) and len(module._modules)%3 ==0:
